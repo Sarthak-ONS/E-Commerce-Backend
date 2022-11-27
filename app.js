@@ -23,9 +23,17 @@ app.use(express.urlencoded({ extended: true }))
 
 // Cookies and File Middlewares
 app.use(cookieParser())
-app.use(fileUpload())
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/temp/"
+}))
 
 
+//temp check only
+app.set('view engine', 'ejs')
+
+
+//morgan middleware
 app.use(morgan('tiny'))
 
 
@@ -42,4 +50,10 @@ app.use('/api/v1', user)
 
 
 
+app.get('/signuptest', (req, res) => {
+    res.render('signuptest')
+})
+
+
+// exports app.js
 module.exports = app;

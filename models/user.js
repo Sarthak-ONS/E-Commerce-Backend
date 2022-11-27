@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: 'user'
     },
-    photos: {
+    photo: {
         id: {
             type: String,
             required: true
@@ -87,6 +87,7 @@ userSchema.methods.getForgotPasswordToken = function () {
     this.forgotPasswordExpiry = Date.now() + 20 * 60 * 1000
 
     return forgotToken
+
 }
 
 

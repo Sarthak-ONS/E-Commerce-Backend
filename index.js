@@ -1,6 +1,21 @@
-const app = require('./app')
+const app = require('./app');
+const connectWithDB = require('./config/db');
 
-console.log(Date.now());
+
+const cloudinary = require('cloudinary')
+
+
+
+
+// Connect with Database
+connectWithDB()
+
+// Cloudinary config
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET
+})
 
 
 app.listen(process.env.PORT, () => {
