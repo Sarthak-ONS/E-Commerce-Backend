@@ -84,10 +84,13 @@ userSchema.methods.getForgotPasswordToken = function () {
     this.forgotPasswordToken = crypto.createHash('sha256').update(forgotToken).digest('hex')
 
     // time of token
-    this.forgotPasswordToken = Date.now() + 20 * 60 * 1000
+    this.forgotPasswordExpiry = Date.now() + 20 * 60 * 1000
 
     return forgotToken
 }
+
+
+
 
 
 module.exports = mongoose.model('user', userSchema)

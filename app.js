@@ -33,11 +33,12 @@ app.use(morgan('tiny'))
 
 const home = require('./routes/home')
 
-
+const user = require('./routes/user')
 
 
 // router middlewares
 app.use('/api/v1', home)
+app.use('/api/v1', user)
 
 
 
