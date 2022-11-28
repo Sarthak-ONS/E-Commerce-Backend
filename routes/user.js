@@ -3,7 +3,7 @@ const { sign } = require('jsonwebtoken')
 
 const router = express.Router()
 
-const { signup, login, logout } = require('../controllers/userController')
+const { signup, login, logout, forgotPassword, passwordReset } = require('../controllers/userController')
 
 
 
@@ -13,6 +13,12 @@ router.route('/login').post(login)
 
 
 router.route('/logout').get(logout)
+
+
+router.route('/forgotPassword').post(forgotPassword)
+
+
+router.route('/password/reset/:token').post(passwordReset)
 
 // router.route('/logout')
 
