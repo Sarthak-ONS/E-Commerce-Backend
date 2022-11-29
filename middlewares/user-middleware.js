@@ -3,6 +3,7 @@ const BigPromise = require('../middlewares/bigPromise')
 const jwt = require('jsonwebtoken')
 const CustomError = require('../utils/customErrors')
 const { decode } = require('jsonwebtoken')
+const { use } = require('../routes/user')
 
 
 exports.isLoggedIn = BigPromise(async (req, res, next) => {
@@ -34,3 +35,19 @@ exports.customRole = (...roles) => {
         next()
     };
 }
+
+
+
+
+exports.admingetOneUser = BigPromise(async (req, res, next) => {
+    const user = await User.findById(req.params.id)
+
+    if (!user) {
+        return next(new CustomError('No User found', 400))
+    }
+
+    res.status(200).json({
+        success: true,
+        user
+    })
+})

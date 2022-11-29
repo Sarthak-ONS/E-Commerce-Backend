@@ -18,6 +18,7 @@ const { signup,
 
 const { isLoggedIn,
     customRole,
+    admingetOneUser,
 } = require('../middlewares/user-middleware')
 
 
@@ -33,8 +34,13 @@ router.route('/userDashboard/update').post(isLoggedIn, updateUserDetails)
 // Admin only routes
 router.route('/admin/getAllUsers').get(isLoggedIn, customRole('user'), adminAllUser)
 
+router.route('/admin/user/:id').get(isLoggedIn, customRole('admin'), admingetOneUser)
 
+
+// Just fun, managers only routes
 router.route('/manager/getAllUsers').get(isLoggedIn, customRole('manager'), managerAllUsers)
+
+
 
 
 module.exports = router
