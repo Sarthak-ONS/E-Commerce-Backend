@@ -179,7 +179,7 @@ exports.passwordReset = BigPromise(async (req, res, next) => {
 
 
 exports.getLoggedInUserDetails = BigPromise(async (req, res, next) => {
-    
+
     const user = await User.findById(req.user.id)
 
     res.status(200).json({
@@ -188,4 +188,31 @@ exports.getLoggedInUserDetails = BigPromise(async (req, res, next) => {
     })
 })
 
- // TODO : We dont have any errors for already singed up Users. 
+
+
+exports.changePassword = BigPromise(async (req, res, next) => {
+
+    const userId = req.user.id;
+
+    const user = await User.findById(userId).select("+password")
+
+
+    //  User will be sending a old password and new password.
+
+
+    const isCorrectOldPassword = await user.isvalidatedPassword(req.body.oldPassword)
+
+
+    if (!isCorrectOldPassword) {
+        console.log("Sent wrong old password");
+        return next(new CustomError('Old Password is inCorrect', 400))
+    }
+
+    user.password = req.body.password
+
+    await user.save()
+
+    cookieToken(user, res)
+
+})
+ // TODO : We dont have any errors for already singed up Users.
