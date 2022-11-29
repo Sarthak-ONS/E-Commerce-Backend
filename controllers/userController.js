@@ -16,6 +16,12 @@ const crypto = require('crypto')
 
 exports.signup = BigPromise(async (req, res, next) => {
 
+    const checkForAlreadyExistingUser = await User.findOne({ 'email': req.body.email })
+
+    if (checkForAlreadyExistingUser) {
+        return next(new CustomError('Account already exists with this email address', 401))
+    }
+
     let result;
 
     if (!req.files) {
@@ -221,6 +227,12 @@ exports.changePassword = BigPromise(async (req, res, next) => {
 exports.updateUserDetails = BigPromise(async (req, res, next) => {
 
 
+    if (!req.body.email || !req.body.name) {
+        return next(new CustomError('Name and Email are compulsory', 400))
+    }
+
+    // TODO : solve bug that anyone can change to any email, 
+    // we have to change it
 
     const newData = {
         name: req.body.name,
@@ -258,6 +270,27 @@ exports.updateUserDetails = BigPromise(async (req, res, next) => {
     res.status(200).json({
         success: true,
         user
+    })
+})
+
+
+
+exports.adminAllUser = BigPromise(async (req, res, next) => {
+    const users = await User.find()
+
+    res.status(200).json({
+        success: true,
+        users
+    })
+})
+
+
+exports.managerAllUsers = BigPromise(async (req, res, next) => {
+    const users = await User.find({ role: 'user' })
+
+    res.status(200).json({
+        success: true,
+        users
     })
 })
  // TODO : We dont have any errors for already singed up Users.
