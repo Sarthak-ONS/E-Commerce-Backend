@@ -11,7 +11,8 @@ const user = require('../models/user');
 const mailHelper = require('../utils/email-helper');
 
 
-const crypto = require('crypto')
+const crypto = require('crypto');
+const { findById } = require('../models/user');
 
 
 exports.signup = BigPromise(async (req, res, next) => {
@@ -283,6 +284,55 @@ exports.adminAllUser = BigPromise(async (req, res, next) => {
         users
     })
 })
+
+
+exports.adminUpdateOneUserDetails = BigPromise(async (req, res, next) => {
+
+
+    const newData = {
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role
+    }
+
+
+
+    const user = await User.findByIdAndUpdate(req.params.id, newData, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
+
+    res.status(200).json({
+        success: true,
+        user
+    })
+
+})
+
+
+exports.adminDeleteAUser = BigPromise(async (req, res, next) => {
+
+
+    const user = await User.findById(req.params.id)
+
+    if (!user) {
+        return next(new CustomError('No such error found', 401))
+    }
+
+    const imageId = user.photo.id
+
+    await cloudinary.v2.uploader.destroy(imageId)
+
+    await user.remove()
+
+    res.status(200).json({
+        success: true,
+
+    })
+})
+
+
 
 
 exports.managerAllUsers = BigPromise(async (req, res, next) => {

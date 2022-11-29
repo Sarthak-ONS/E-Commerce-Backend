@@ -13,6 +13,8 @@ const { signup,
     updateUserDetails,
     adminAllUser,
     managerAllUsers,
+    adminUpdateOneUserDetails,
+    adminDeleteAUser,
 
 } = require('../controllers/userController')
 
@@ -34,7 +36,10 @@ router.route('/userDashboard/update').post(isLoggedIn, updateUserDetails)
 // Admin only routes
 router.route('/admin/getAllUsers').get(isLoggedIn, customRole('user'), adminAllUser)
 
-router.route('/admin/user/:id').get(isLoggedIn, customRole('admin'), admingetOneUser)
+router.route('/admin/user/:id')
+    .get(isLoggedIn, customRole('user'), admingetOneUser)
+    .put(isLoggedIn, customRole('admin'), adminUpdateOneUserDetails)
+    .delete(isLoggedIn, customRole('user'), adminDeleteAUser)
 
 
 // Just fun, managers only routes
