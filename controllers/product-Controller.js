@@ -128,6 +128,17 @@ exports.addAReview = BigPromise(async (req, res, next) => {
 })
 
 
+exports.getOnlytReviewsForOneProduct = BigPromise(async (req, res, next) => {
+    const { productId } = req.query
+
+    const product = await Product.findById(productId)
+
+    res.status(200).json({
+        reviews: product.reviews
+    })
+})
+
+
 exports.deleteReview = BigPromise(async (req, res, next) => {
     const { productId } = req.query;
 
