@@ -22,7 +22,7 @@ class WhereClause {
         return this
     }
 
-    page(resultPerPage) {
+    pager(resultPerPage) {
         let currentPage = 1
 
         if (this.bigQ.page) {
@@ -57,6 +57,7 @@ class WhereClause {
 
         this.base = this.base.find(jsonOfCopyQ)
 
+        return this;
     }
 
 
