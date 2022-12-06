@@ -125,7 +125,7 @@ exports.forgotPassword = BigPromise(async (req, res, next) => {
 
         await mailHelper({
             email: user.email,
-            subject: "E Commerce Backend -  Password Reset Email",
+            subject: "E Commerce App -  Password Reset Email",
             message
         })
         res.status(200).json({
@@ -176,7 +176,6 @@ exports.passwordReset = BigPromise(async (req, res, next) => {
 
     await user.save()
 
-    // 
 
     cookieToken(user, res)
 
@@ -314,7 +313,8 @@ exports.adminUpdateOneUserDetails = BigPromise(async (req, res, next) => {
 exports.adminDeleteAUser = BigPromise(async (req, res, next) => {
 
 
-    const user = await User.findById(req.params.id)
+    //const user = await User.findById(req.params.id)
+    console.log(`Deleting user for ${req.params.id}`);
 
     if (!user) {
         return next(new CustomError('No such error found', 401))
