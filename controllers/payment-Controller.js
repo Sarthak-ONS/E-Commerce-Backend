@@ -8,6 +8,8 @@ exports.sendStripeKey = BigPromise(async (req, res, next) => {
         stripeKey: process.env.STRIPE_API_KEY,
     })
 })
+
+
 exports.captureStripePayment = BigPromise(async (req, res, next) => {
 
     const paymentIntent = await stripe.paymentIntents.create({
