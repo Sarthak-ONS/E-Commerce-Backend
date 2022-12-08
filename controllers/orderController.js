@@ -4,6 +4,7 @@ const Product = require('../models/product')
 
 const BigPromise = require('../middlewares/bigPromise');
 const CustomError = require('../utils/customErrors');
+const { update } = require('../models/order');
 
 
 exports.createOrder = BigPromise(async (req, res, next) => {
@@ -95,6 +96,10 @@ exports.adminUpdateOrder = BigPromise(async (req, res, next) => {
     }
 
     order.orderStatus = req.body.orderStatus
+
+    order.orderitems.forEach(async prod => {
+        await updateProductStock(prod.product, prod.quantity)
+    })
     await order.save()
 
     if (!order) {
@@ -107,6 +112,16 @@ exports.adminUpdateOrder = BigPromise(async (req, res, next) => {
 
 })
 
+
+exports.adminDeleteAOrder = BigPromise(async (req, res, next) => {
+    const order = await Order.findById(req.params.id)
+
+    await order.remove()
+
+    res.status(200).json({
+        success: true
+    })
+})
 
 async function updateProductStock(productId, qunatity) {
     const product = await Product.findById(productId)
