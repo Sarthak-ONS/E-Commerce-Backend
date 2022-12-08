@@ -8,7 +8,7 @@ const { isLoggedIn, customRole } = require('../middlewares/user-middleware')
 router.route('/products').get(getAllProducts)
 router.route('/product/:id').get(getOneProduct)
 
-router.route('/review'.put(isLoggedIn, addAReview))
+router.route('/review').put(isLoggedIn, addAReview)
 router.route('/review').delete(isLoggedIn, deleteReview)
 
 
