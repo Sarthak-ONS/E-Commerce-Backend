@@ -65,3 +65,51 @@ exports.getLoggedInUserOrder = BigPromise(async (req, res, next) => {
     })
 
 })
+
+
+exports.adminGetAllOrders = BigPromise(async (req, res, next) => {
+
+
+    const orders = await Order.find()
+
+
+
+    if (!order) {
+        return next(new CustomError('Please checkk a user Id', 401))
+    }
+    res.status(200).json({
+        success: true,
+        order
+    })
+
+})
+
+
+exports.adminUpdateOrder = BigPromise(async (req, res, next) => {
+
+
+    const order = await Order.findById(req.params.id)
+
+    if (order.orderStatus === 'delivered') {
+        return next(new CustomError('order is already marked for delivered', 401))
+    }
+
+    order.orderStatus = req.body.orderStatus
+    await order.save()
+
+    if (!order) {
+        return next(new CustomError('Please checkk a user Id', 401))
+    }
+    res.status(200).json({
+        success: true,
+        order
+    })
+
+})
+
+
+async function updateProductStock(productId, qunatity) {
+    const product = await Product.findById(productId)
+    product.stock = product.stock - qunatity
+    await product.save({ validateBeforeSave: false })
+}
