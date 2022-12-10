@@ -24,30 +24,33 @@
  
  <h1>Steps to run the application</h1>
  1. Create a dotenv file in the root directory and add the following parameters.
- PORT=4000
+ 
+     <br>
+    PORT=
 
-DB_URL=
+    DB_URL=<br>
 
-JWT_SECRET=
-JWT_EXPIRY=
-COOKIE_TIME=
+    JWT_SECRET=<br>
+    JWT_EXPIRY=<br>
+    COOKIE_TIME=<br>
 
 
-CLOUDINARY_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_SECRET=
+    CLOUDINARY_NAME=<br>
+    CLOUDINARY_API_KEY=<br>
+    CLOUDINARY_SECRET=<br>
 
-SMTP_HOST=
-SMTP_PORT=
-SMTP_USER=
-SMTP_PASS=
+    SMTP_HOST=<br>
+    SMTP_PORT=<br>
+    SMTP_USER=<br>
+    SMTP_PASS=<br>
 
-STRIPE_API_KEY=
-STRIPE_SECRET=
+    STRIPE_API_KEY=<br>
+    STRIPE_SECRET=<br>
 
-RAZORPAY_API_KEY=
-RAZORPAY_SECRET=
+    RAZORPAY_API_KEY=<br>
+    RAZORPAY_SECRET=<br>
 
+    <br>
 
 After add all these paramters in the file. save and run.
 
