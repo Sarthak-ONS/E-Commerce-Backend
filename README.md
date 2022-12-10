@@ -1,7 +1,7 @@
 ﻿# Cannes
  
  
- This is a backend project, with a bare minium frontend just for testing.
+ This is a backend API project, with a bare minium frontend just for testing.
  
  In this project , we have created a backend API for a full fledged E-Commerce Store.
  
@@ -20,12 +20,13 @@
  2. Razorpay and Stripe for payment Gateway Integration
  3. MongoDB as Database.
  4. Mailtrap for sending mails.
+ 5. Postman for Testing the API
  
  
  <h1>Steps to run the application</h1>
  1. Create a dotenv file in the root directory and add the following parameters.
  
-     <br>
+     
     PORT=
 
     DB_URL=<br>
@@ -50,9 +51,13 @@
     RAZORPAY_API_KEY=<br>
     RAZORPAY_SECRET=<br>
 
-    <br>
+    
 
 After add all these paramters in the file. save and run.
 
 2. RUN the command - > npm run dev (For Developers script.)
+
+
+Please feel free to add new features and fix bugs in the project.
+<h1>Happy Coding</h1>
 
